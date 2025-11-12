@@ -20,110 +20,127 @@ namespace Simulación_de_Elecciones_Presidenciales_US
 
         private void btnagregarrep_Click(object sender, EventArgs e)
         {
-            if (cmbestados.SelectedItem == null)
+            try
             {
-                MessageBox.Show("Selecciona un estado");
-                return;
-            }
+                if (cmbestados.SelectedItem == null)
+                    throw new Exception("Selecciona un estado.");
 
-            string estado = ((KeyValuePair<string, int>)cmbestados.SelectedItem).Key;
-            int puntos = ((KeyValuePair<string, int>)cmbestados.SelectedItem).Value;
+                var estadoSel = (KeyValuePair<string, int>)cmbestados.SelectedItem;
 
-            if (acciones.Agregarestadorep(estado, puntos))
-            {
-                MessageBox.Show($"Estado {estado} agregado a Republicanos.");
-                cmbestados.DataSource = new BindingSource(acciones.Estados, null);
+                if (!acciones.Agregarestadorep(estadoSel.Key, estadoSel.Value))
+                    throw new Exception("Error al agregar estado.");
+
+                RefrescarInterfaz();
                 ActualizarGridRepublicanos();
+                VerificarGanador();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar estado.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnagregardem_Click(object sender, EventArgs e)
         {
-            if (cmbestados.SelectedItem == null)
+            try
             {
-                MessageBox.Show("Selecciona un estado");
-                return;
-            }
+                if (cmbestados.SelectedItem == null)
+                    throw new Exception("Selecciona un estado.");
 
-            string estado = ((KeyValuePair<string, int>)cmbestados.SelectedItem).Key;
-            int puntos = ((KeyValuePair<string, int>)cmbestados.SelectedItem).Value;
+                var estadoSel = (KeyValuePair<string, int>)cmbestados.SelectedItem;
 
-            if (acciones.Agregarestadodem(estado, puntos))
-            {
-                MessageBox.Show($"Estado {estado} agregado a Demócratas.");
-                cmbestados.DataSource = new BindingSource(acciones.Estados, null);
+                if (!acciones.Agregarestadodem(estadoSel.Key, estadoSel.Value))
+                    throw new Exception("Error al agregar estado.");
+
+                RefrescarInterfaz();
                 ActualizarGridDemocratas();
+                VerificarGanador();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar estado.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnelimrep_Click(object sender, EventArgs e)
         {
-            if (dgvrep.CurrentRow == null)
+            try
             {
-                MessageBox.Show("Selecciona un estado de la tabla Republicanos.");
-                return;
-            }
+                if (dgvrep.CurrentRow == null)
+                    throw new Exception("Selecciona un estado de la tabla Republicanos.");
 
-            string estado = dgvrep.CurrentRow.Cells[0].Value.ToString();
-            int puntos = int.Parse(dgvrep.CurrentRow.Cells[1].Value.ToString());
+                string estado = dgvrep.CurrentRow.Cells[0].Value.ToString();
+                int puntos = int.Parse(dgvrep.CurrentRow.Cells[1].Value.ToString());
 
-            if (acciones.Eliminarestadorep(estado, puntos))
-            {
-                MessageBox.Show($"Estado {estado} eliminado de Republicanos.");
-                cmbestados.DataSource = new BindingSource(acciones.Estados, null);
+                if (!acciones.Eliminarestadorep(estado, puntos))
+                    throw new Exception("Error al eliminar estado.");
+
+                RefrescarInterfaz();
                 ActualizarGridRepublicanos();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar estado.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnelimdem_Click(object sender, EventArgs e)
         {
-            if (dgvdem.CurrentRow == null)
+            try
             {
-                MessageBox.Show("Selecciona un estado de la tabla Demócratas.");
-                return;
-            }
+                if (dgvdem.CurrentRow == null)
+                    throw new Exception("Selecciona un estado de la tabla Demócratas.");
 
-            string estado = dgvdem.CurrentRow.Cells[0].Value.ToString();
-            int puntos = int.Parse(dgvdem.CurrentRow.Cells[1].Value.ToString());
+                string estado = dgvdem.CurrentRow.Cells[0].Value.ToString();
+                int puntos = int.Parse(dgvdem.CurrentRow.Cells[1].Value.ToString());
 
-            if (acciones.Eliminarestadodem(estado, puntos))
-            {
-                MessageBox.Show($"Estado {estado} eliminado de Demócratas.");
-                cmbestados.DataSource = new BindingSource(acciones.Estados, null);
+                if (!acciones.Eliminarestadodem(estado, puntos))
+                    throw new Exception("Error al eliminar estado.");
+
+                RefrescarInterfaz();
                 ActualizarGridDemocratas();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar estado.");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btncalcular_Click(object sender, EventArgs e)
         {
-            int totalRep = acciones.Mostrarrep().Sum(x => x.Value);
-            int totalDem = acciones.Mostrardem().Sum(x => x.Value);
+            try
+            {
+                int totalRep = acciones.Mostrarrep().Sum(x => x.Value);
+                int totalDem = acciones.Mostrardem().Sum(x => x.Value);
 
-            string resultado;
-            if (totalRep >= 270)
-                resultado = $"🏆 ¡Republicanos ganan con {totalRep} votos!";
-            else if (totalDem >= 270)
-                resultado = $"🏆 ¡Demócratas ganan con {totalDem} votos!";
-            else
-                resultado = $"Republicanos: {totalRep} | Demócratas: {totalDem}";
+                string resultado;
 
-            MessageBox.Show(resultado);
+                if (totalRep >= 270)
+                {
+                    resultado = $"🏆 ¡Republicanos ganan con {totalRep} votos!";
+                    BloquearBotones();
+                }
+                else if (totalDem >= 270)
+                {
+                    resultado = $"🏆 ¡Demócratas ganan con {totalDem} votos!";
+                    BloquearBotones();
+                }
+                else
+                {
+                    if (totalRep > totalDem)
+                        resultado = $"Aún no hay ganador. Republicanos lideran: {totalRep} vs {totalDem}";
+                    else if (totalDem > totalRep)
+                        resultado = $"Aún no hay ganador. Demócratas lideran: {totalDem} vs {totalRep}";
+                    else
+                        resultado = $"Empate técnico. Ambos tienen {totalRep} votos.";
+                }
+
+                MessageBox.Show(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al calcular: {ex.Message}");
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -140,17 +157,86 @@ namespace Simulación_de_Elecciones_Presidenciales_US
         private void ActualizarGridRepublicanos()
         {
             dgvrep.Rows.Clear();
-            foreach (var kvp in acciones.Mostrarrep())
-                dgvrep.Rows.Add(kvp.Key, kvp.Value);
-            
+            foreach (var i in acciones.Mostrarrep())
+                dgvrep.Rows.Add(i.Key, i.Value);
+
         }
 
         private void ActualizarGridDemocratas()
         {
             dgvdem.Rows.Clear();
-            foreach (var kvp in acciones.Mostrardem())
-                dgvdem.Rows.Add(kvp.Key, kvp.Value);
+            foreach (var i in acciones.Mostrardem())
+                dgvdem.Rows.Add(i.Key, i.Value);
+        }
+
+        private void btnlimpiar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                acciones.Limpiar();
+                RefrescarInterfaz();
+                dgvrep.Rows.Clear();
+                dgvdem.Rows.Clear();
+                HabilitarBotones();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al limpiar: {ex.Message}");
+            }
+        }
+        private void RefrescarInterfaz()
+        {
+            cmbestados.DataSource = new BindingSource(acciones.Estados, null);
+        }
+        private void BloquearBotones()
+        {
+            btnagregarrep.Enabled = false;
+            btnagregardem.Enabled = false;
+            btnelimrep.Enabled = false;
+            btnelimdem.Enabled = false;
+            btncalcular.Enabled = false;
+            cmbestados.Enabled = false;
+
+
+        }
+        private void VerificarGanador()
+        {
+            try
+            {
+                int totalRep = acciones.Mostrarrep().Sum(x => x.Value);
+            int totalDem = acciones.Mostrardem().Sum(x => x.Value);
+
+            string resultado = "";
+
+            if (totalRep >= 270)
+            {
+                resultado = $"🏆 ¡Republicanos ganan con {totalRep} votos!";
+                BloquearBotones();
+            }
+            else if (totalDem >= 270)
+            {
+                resultado = $"🏆 ¡Demócratas ganan con {totalDem} votos!";
+                BloquearBotones();
+            }
+           
+            if (!string.IsNullOrEmpty(resultado))
+                MessageBox.Show(resultado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
+        private void HabilitarBotones()
+        {
+            btnagregarrep.Enabled = true;
+            btnagregardem.Enabled = true;
+            btnelimrep.Enabled = true;
+            btnelimdem.Enabled = true;
+            btncalcular.Enabled = true;
+            cmbestados.Enabled = true;
         }
     }
-    }
-
+}

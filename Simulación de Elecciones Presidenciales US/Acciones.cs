@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,57 +16,19 @@ namespace Simulación_de_Elecciones_Presidenciales_US
 
         public Dictionary<string, int> Estados = new Dictionary<string, int>
         {
-            { "AL", 9 },
-            { "AK", 3 },
-            { "AZ", 11 },
-            { "AR", 6 },
-            { "CA", 54 },
-            { "CO", 10 },
-            { "CT", 7 },
-            { "DE", 3 },
-            { "FL", 30 },
-            { "GA", 16 },
-            { "HI", 4 },
-            { "ID", 4 },
-            { "IL", 19 },
-            { "IN", 11 },
-            { "IA", 6 },
-            { "KS", 6 },
-            { "KY", 8 },
-            { "LA", 8 },
-            { "ME", 4 },
-            { "MD", 10 },
-            { "MA", 11 },
-            { "MI", 15 },
-            { "MN", 10 },
-            { "MS", 6 },
-            { "MO", 10 },
-            { "MT", 4 },
-            { "NE", 5 },
-            { "NV", 6 },
-            { "NH", 4 },
-            { "NJ", 14 },
-            { "NM", 5 },
-            { "NY", 28 },
-            { "NC", 16 },
-            { "ND", 3 },
-            { "OH", 17 },
-            { "OK", 7 },
-            { "OR", 8 },
-            { "PA", 19 },
-            { "RI", 4 },
-            { "SC", 9 },
-            { "SD", 3 },
-            { "TN", 11 },
-            { "TX", 40 },
-            { "UT", 6 },
-            { "VT", 3 },
-            { "VA", 13 },
-            { "WA", 12 },
-            { "WV", 4 },
-            { "WI", 10 },
-            { "WY", 3 },
-            { "DC", 3 }
+                {"AL", 9},{"AK", 3},{"AZ", 11},{"AR", 6},
+                {"CA", 55},{"CO", 9},{"CT", 7},{"DE", 3},
+                {"FL", 29},{"GA", 16},{"HI", 4},{"ID", 4},
+                {"IL", 20},{"IN", 11},{"IA", 6},{"KS", 6},
+                {"KY", 8},{"LA", 8},{"ME", 4},{"MD", 10},
+                {"MA", 11},{"MI", 16},{"MN", 10},{"MS", 6},
+                {"MO", 10},{"MT", 3},{"NE", 5},{"NV", 6},
+                {"NH", 4},{"NJ", 14},{"NM", 5},{"NY", 29},
+                {"NC", 15},{"ND", 3},{"OH", 18},{"OK", 7},
+                {"OR", 7},{"PA", 20},{"RI", 4},{"SC", 9},
+                {"SD", 3},{"TN", 11},{"TX", 38},{"UT", 6},
+                {"VT", 3},{"VA", 13},{"WA", 12},{"WV", 5},
+                {"WI", 10},{"WY", 3}
         };
 
         public Dictionary<string, int> Mostrarrep()
@@ -143,5 +106,28 @@ namespace Simulación_de_Elecciones_Presidenciales_US
             }
         }
 
+        public void Limpiar()
+        {
+            Estados = new Dictionary<string, int>()
+             {
+                {"AL", 9},{"AK", 3},{"AZ", 11},{"AR", 6},
+                {"CA", 55},{"CO", 9},{"CT", 7},{"DE", 3},
+                {"FL", 29},{"GA", 16},{"HI", 4},{"ID", 4},
+                {"IL", 20},{"IN", 11},{"IA", 6},{"KS", 6},
+                {"KY", 8},{"LA", 8},{"ME", 4},{"MD", 10},
+                {"MA", 11},{"MI", 16},{"MN", 10},{"MS", 6},
+                {"MO", 10},{"MT", 3},{"NE", 5},{"NV", 6},
+                {"NH", 4},{"NJ", 14},{"NM", 5},{"NY", 29},
+                {"NC", 15},{"ND", 3},{"OH", 18},{"OK", 7},
+                {"OR", 7},{"PA", 20},{"RI", 4},{"SC", 9},
+                {"SD", 3},{"TN", 11},{"TX", 38},{"UT", 6},
+                {"VT", 3},{"VA", 13},{"WA", 12},{"WV", 5},
+                {"WI", 10},{"WY", 3}
+             };
+
+            Republicanos.Clear();
+            Democratas.Clear();
+        }
     }
 }
+    

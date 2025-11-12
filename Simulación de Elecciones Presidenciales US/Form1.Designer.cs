@@ -37,15 +37,12 @@
             this.cmbestados = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txbelimrep = new System.Windows.Forms.TextBox();
-            this.txbelimdem = new System.Windows.Forms.TextBox();
             this.btnelimrep = new System.Windows.Forms.Button();
             this.btnelimdem = new System.Windows.Forms.Button();
-            this.txbagergarrep = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txbagregardem = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnagregardem = new System.Windows.Forms.Button();
+            this.btnlimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvrep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvdem)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +69,7 @@
             // 
             // btnagregarrep
             // 
-            this.btnagregarrep.Location = new System.Drawing.Point(152, 353);
+            this.btnagregarrep.Location = new System.Drawing.Point(152, 336);
             this.btnagregarrep.Name = "btnagregarrep";
             this.btnagregarrep.Size = new System.Drawing.Size(153, 37);
             this.btnagregarrep.TabIndex = 2;
@@ -82,7 +79,7 @@
             // 
             // btncalcular
             // 
-            this.btncalcular.Location = new System.Drawing.Point(407, 370);
+            this.btncalcular.Location = new System.Drawing.Point(407, 336);
             this.btncalcular.Name = "btncalcular";
             this.btncalcular.Size = new System.Drawing.Size(153, 54);
             this.btncalcular.TabIndex = 5;
@@ -123,7 +120,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(161, 426);
+            this.label3.Location = new System.Drawing.Point(161, 408);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(143, 16);
             this.label3.TabIndex = 9;
@@ -132,29 +129,15 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(655, 426);
+            this.label4.Location = new System.Drawing.Point(655, 408);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(146, 16);
             this.label4.TabIndex = 10;
             this.label4.Text = "Estado a eliminar Dem:";
             // 
-            // txbelimrep
-            // 
-            this.txbelimrep.Location = new System.Drawing.Point(157, 445);
-            this.txbelimrep.Name = "txbelimrep";
-            this.txbelimrep.Size = new System.Drawing.Size(156, 22);
-            this.txbelimrep.TabIndex = 11;
-            // 
-            // txbelimdem
-            // 
-            this.txbelimdem.Location = new System.Drawing.Point(651, 445);
-            this.txbelimdem.Name = "txbelimdem";
-            this.txbelimdem.Size = new System.Drawing.Size(156, 22);
-            this.txbelimdem.TabIndex = 12;
-            // 
             // btnelimrep
             // 
-            this.btnelimrep.Location = new System.Drawing.Point(157, 473);
+            this.btnelimrep.Location = new System.Drawing.Point(148, 445);
             this.btnelimrep.Name = "btnelimrep";
             this.btnelimrep.Size = new System.Drawing.Size(156, 44);
             this.btnelimrep.TabIndex = 13;
@@ -164,20 +147,13 @@
             // 
             // btnelimdem
             // 
-            this.btnelimdem.Location = new System.Drawing.Point(650, 473);
+            this.btnelimdem.Location = new System.Drawing.Point(642, 445);
             this.btnelimdem.Name = "btnelimdem";
             this.btnelimdem.Size = new System.Drawing.Size(156, 44);
             this.btnelimdem.TabIndex = 14;
             this.btnelimdem.Text = "eliminar";
             this.btnelimdem.UseVisualStyleBackColor = true;
             this.btnelimdem.Click += new System.EventHandler(this.btnelimdem_Click);
-            // 
-            // txbagergarrep
-            // 
-            this.txbagergarrep.Location = new System.Drawing.Point(157, 325);
-            this.txbagergarrep.Name = "txbagergarrep";
-            this.txbagergarrep.Size = new System.Drawing.Size(156, 22);
-            this.txbagergarrep.TabIndex = 16;
             // 
             // label5
             // 
@@ -187,13 +163,6 @@
             this.label5.Size = new System.Drawing.Size(144, 16);
             this.label5.TabIndex = 15;
             this.label5.Text = "Estado a agregar Rep:";
-            // 
-            // txbagregardem
-            // 
-            this.txbagregardem.Location = new System.Drawing.Point(648, 325);
-            this.txbagregardem.Name = "txbagregardem";
-            this.txbagregardem.Size = new System.Drawing.Size(156, 22);
-            this.txbagregardem.TabIndex = 18;
             // 
             // label6
             // 
@@ -206,7 +175,7 @@
             // 
             // btnagregardem
             // 
-            this.btnagregardem.Location = new System.Drawing.Point(645, 353);
+            this.btnagregardem.Location = new System.Drawing.Point(645, 336);
             this.btnagregardem.Name = "btnagregardem";
             this.btnagregardem.Size = new System.Drawing.Size(153, 37);
             this.btnagregardem.TabIndex = 19;
@@ -214,20 +183,27 @@
             this.btnagregardem.UseVisualStyleBackColor = true;
             this.btnagregardem.Click += new System.EventHandler(this.btnagregardem_Click);
             // 
+            // btnlimpiar
+            // 
+            this.btnlimpiar.Location = new System.Drawing.Point(407, 408);
+            this.btnlimpiar.Name = "btnlimpiar";
+            this.btnlimpiar.Size = new System.Drawing.Size(153, 54);
+            this.btnlimpiar.TabIndex = 20;
+            this.btnlimpiar.Text = "limpiar";
+            this.btnlimpiar.UseVisualStyleBackColor = true;
+            this.btnlimpiar.Click += new System.EventHandler(this.btnlimpiar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(938, 539);
+            this.Controls.Add(this.btnlimpiar);
             this.Controls.Add(this.btnagregardem);
-            this.Controls.Add(this.txbagregardem);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txbagergarrep);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnelimdem);
             this.Controls.Add(this.btnelimrep);
-            this.Controls.Add(this.txbelimdem);
-            this.Controls.Add(this.txbelimrep);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbestados);
@@ -258,15 +234,12 @@
         private System.Windows.Forms.ComboBox cmbestados;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txbelimrep;
-        private System.Windows.Forms.TextBox txbelimdem;
         private System.Windows.Forms.Button btnelimrep;
         private System.Windows.Forms.Button btnelimdem;
-        private System.Windows.Forms.TextBox txbagergarrep;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txbagregardem;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnagregardem;
+        private System.Windows.Forms.Button btnlimpiar;
     }
 }
 
